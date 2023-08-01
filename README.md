@@ -10,9 +10,9 @@
 ##### 下载
 Github：
 ```
-curl -o https://github.com/Zyy955/Yunzai-Bot-plugin/blob/main/SetMaster.js
+curl -o "./plugins/example/SetMaster.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/SetMaster.js"
 ```
 Gitee：
 ```
-curl -o https://gitee.com/Zyy955/Yunzai-Bot-plugin/blob/main/SetMaster.js
+curl -o "./plugins/example/SetMaster.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/SetMaster.js"
 ```
