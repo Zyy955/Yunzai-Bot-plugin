@@ -37,15 +37,9 @@ curl -o "./plugins/example/SetMaster.js" "https://gitee.com/Zyy955/Yunzai-Bot-pl
 Github：
 ```
 curl -o "./plugins/example/kick.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/kick.js"
-curl -o "./resources/kick/kick.css" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/kick/kick.css"
-curl -o "./resources/kick/kick.html" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/kick/kick.html"
-curl -o "./resources/kick/kick.jpg" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/kick/kick.jpg"
 ```
 
 Gitee：
 ```
 curl -o "./plugins/example/kick.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick.js"
-curl -o "./resources/kick/kick.css" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick/kick.css"
-curl -o "./resources/kick/kick.html" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick/kick.html"
-curl -o "./resources/kick/kick.jpg" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick/kick.jpg"
 ```
