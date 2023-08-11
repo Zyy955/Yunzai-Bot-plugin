@@ -19,7 +19,7 @@ export class kick extends plugin {
             priority: 1,
             rule: [
                 {
-                    reg: /^#(踢|滚|kick)$/,
+                    reg: /^[#/](踢|滚|kick)$/,
                     fnc: 'kick'
                 }
             ]
