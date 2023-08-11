@@ -2,7 +2,7 @@
 
 ### 设置主人
 
-为`Yunzai-Bot`设计，适用于`QQGuild-Plugig`
+为`Yunzai-Bot`设计，适用于`QQGuild-Plugin`
 
 插件和`TRSS-Yunzai`自带的`#设置主人`并无区别，多了一个at添加主人
 
