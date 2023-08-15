@@ -27,6 +27,7 @@ curl -o "./plugins/example/SetMaster.js" "https://gitee.com/Zyy955/Yunzai-Bot-pl
 - 喵崽的QQ群 私聊
 - 时雨崽的QQ群 私聊 QQ频道插件
 - 不支持喵崽的频道插件 时雨崽的gocq频道
+- 支持[新版QQGuild-plugin](https://gitee.com/Zyy955/QQGuild-plugin)
 
 - 使用方法
   - 方法1：发送`#踢`，生成踢自己
@@ -45,4 +46,25 @@ curl -o "./plugins/example/kick.js" "https://raw.githubusercontent.com/Zyy955/Yu
 Gitee：
 ```
 curl -o "./plugins/example/kick.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick.js"
+```
+
+### 无需登录QQ启动机器人
+
+搭配[QQGuild-plugin](https://gitee.com/Zyy955/QQGuild-plugin)插件启用可无需登录QQ使用频道
+
+##### 使用方法
+
+下载完成后，使用`node apps`启动即可~
+
+如果想使用原来的，使用`node app`启动即可~
+
+##### 下载
+Github：
+```
+curl -o "./apps.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/apps.js"
+```
+
+Gitee：
+```
+curl -o "./apps.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/apps.js"
 ```
