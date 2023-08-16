@@ -45,7 +45,8 @@ export class StarRail extends plugin {
                 StarRail.e = e
                 StarRail.reply = this.reply
                 /** 获取星铁uid */
-                const uid = e?.user.getUid('sr') || ""
+                const uid = e?.user?.getUid('sr') || ""
+                if (!uid) return e.reply("请先绑定星铁UID (^_−)☆")
                 const data = await StarRail.getPanelData(uid, false)
                 let renderData = {
                     api: api.split('/')[2],
@@ -78,7 +79,8 @@ export class StarRail extends plugin {
                 StarRail.e = e
                 StarRail.reply = this.reply
                 /** 获取星铁uid */
-                const uid = e?.user.getUid('sr') || ""
+                const uid = e?.user?.getUid('sr') || ""
+                if (!uid) return e.reply("请先绑定星铁UID (^_−)☆")
                 /** 获取角色名称 */
                 const charName = e.msg.replace(/#|星铁|面板|面版/g, "")
                 const { pluginRoot } = await import("../StarRail-plugin/utils/path.js")
