@@ -20,11 +20,11 @@
 ##### 下载
 Github：
 ```
-curl -o "./plugins/example/SetMaster.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/StarRail.js"
+curl -o "./plugins/example/StarRail.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/StarRail.js"
 ```
 Gitee：
 ```
-curl -o "./plugins/example/SetMaster.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail.js"
+curl -o "./plugins/example/StarRail.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail.js"
 ```
 
 
