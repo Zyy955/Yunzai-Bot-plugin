@@ -2,6 +2,8 @@
 
 ## 同时使用星铁插件和喵喵插件
 
+`貌似有点小错误，会查询两次...后面再修吧，没啥时间(能用= =)`
+
 目前只兼容了`*更新面板`、`#星铁更新面板`、`*希儿面板`、`#星铁希儿面板`  
 
 ！！！并没有只有希儿能用！上面是举个例子！
@@ -95,3 +97,33 @@ Gitee：
 ```
 curl -o "./plugins/example/kick.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick.js"
 ```
+
+
+## 怪物入侵
+
+- 暂时只支持以下几种场景
+- 喵崽的QQ群 私聊
+- 时雨崽的QQ群 私聊 QQ频道插件
+- 不支持喵崽的频道插件 时雨崽的gocq频道
+- 支持[新版QQGuild-plugin](https://gitee.com/Zyy955/QQGuild-plugin)
+
+- 使用方法
+  - 方法1：发送`#怪物入侵`，怪物为自己
+  - 方法2：发送`#怪物入侵@用户`，怪物为`@的用户`
+
+##### 效果图预览
+
+![](https://cdn.jsdelivr.net/gh/Zyy955/imgs/img/202308270006112.png)
+
+##### 下载
+Github：
+```
+curl -o "./plugins/example/invade.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/invade.js"
+```
+
+Gitee：
+```
+curl -o "./plugins/example/invade.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/invade.js"
+```
+
+
