@@ -127,3 +127,9 @@ curl -o "./plugins/example/invade.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugi
 ```
 
 
+## 爱发电
+
+QQ群：`884587317`
+
+![爱发电](https://cdn.jsdelivr.net/gh/Zyy955/imgs/img/202308271209508.jpeg)
+
