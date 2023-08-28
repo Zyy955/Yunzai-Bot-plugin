@@ -1,4 +1,6 @@
-### 所有插件的下载连接在`Yunzai-bot根目录执行`，也可以自行查看源码后保存下载
+QQ交流群~欢迎加入：`884587317`
+
+#### 所有插件的下载连接在`Yunzai-bot根目录执行`，也可以自行查看源码后保存下载
 
 ## 同时使用星铁插件和喵喵插件
 
@@ -128,8 +130,6 @@ curl -o "./plugins/example/invade.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugi
 
 
 ## 爱发电
-
-QQ群：`884587317`
 
 ![爱发电](https://cdn.jsdelivr.net/gh/Zyy955/imgs/img/202308271209508.jpeg)
 
