@@ -4,7 +4,7 @@ QQ交流群~欢迎加入：`884587317`
 
 ## 同时使用星铁插件和喵喵插件
 
-`貌似有点小错误，会查询两次...后面再修吧，没啥时间(能用= =)`
+`2023年9月5日更新了1.1版本，需要更新的请直接根目录重新跑一次下载指令，修复以前重复查询问题`
 
 目前只兼容了`*更新面板`、`#星铁更新面板`、`*希儿面板`、`#星铁希儿面板`  
 
@@ -24,11 +24,11 @@ QQ交流群~欢迎加入：`884587317`
 ##### 下载
 Github：
 ```
-curl -o "./plugins/example/StarRail.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/StarRail.js"
+curl -o "./plugins/example/StarRail_v1.1.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/StarRail_v1.1.js"
 ```
 Gitee：
 ```
-curl -o "./plugins/example/StarRail.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail.js"
+curl -o "./plugins/example/StarRail_v1.1.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail_v1.1.js"
 ```
 
 
