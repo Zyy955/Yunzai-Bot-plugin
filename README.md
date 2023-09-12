@@ -2,7 +2,9 @@ QQ交流群~欢迎加入：`884587317`
 
 #### 所有插件的下载连接在`Yunzai-bot根目录执行`，也可以自行查看源码后保存下载
 
-## 同时使用星铁插件和喵喵插件
+#### 同时使用星铁插件和喵喵插件
+
+<details><summary>展开/收起</summary>
 
 `2023年9月5日更新了1.1版本，需要更新的请直接根目录重新跑一次下载指令，修复以前重复查询问题`
 
@@ -31,8 +33,12 @@ Gitee：
 curl -o "./plugins/example/StarRail_v1.1.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail_v1.1.js"
 ```
 
+</details>
 
-## 设置主人
+
+#### 设置主人
+
+<details><summary>展开/收起</summary>
 
 为`Yunzai-Bot`设计，适用于`QQGuild-Plugin`
 
@@ -52,7 +58,11 @@ Gitee：
 curl -o "./plugins/example/SetMaster.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/SetMaster.js"
 ```
 
-## 无需登录QQ启动机器人
+</details>
+
+#### 无需登录QQ启动机器人
+
+<details><summary>展开/收起</summary>
 
 搭配[QQGuild-plugin](https://gitee.com/Zyy955/QQGuild-plugin)插件启用可无需登录QQ使用频道
 
@@ -73,7 +83,45 @@ Gitee：
 curl -o "./apps.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/apps.js"
 ```
 
-## 踢
+</details>
+
+#### 提供js下载链接直接下载到example目录
+
+<details><summary>展开/收起</summary>
+
+使用说明：
+![](https://cdn.jsdelivr.net/gh/Zyy955/imgs/img/202309130055196.png)
+
+点击原始数据后，复制浏览器上方地址
+
+![](https://cdn.jsdelivr.net/gh/Zyy955/imgs/img/202309130056145.png)
+
+格式：
+```
+#下载https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail_v1.1.js
+
+可选参数：自定义文件名称
+#下载https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/StarRail_v1.1.js 星铁插件
+
+得到`星铁插件.js`
+```
+
+##### 下载
+Github：
+```
+curl -o "./plugins/example/download_js.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/download_js.js"
+```
+Gitee：
+```
+curl -o "./plugins/example/download_js.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/download_js.js"
+```
+
+</details>
+
+
+#### 踢
+
+<details><summary>展开/收起</summary>
 
 - 暂时只支持以下几种场景
 - 喵崽的QQ群 私聊
@@ -100,8 +148,11 @@ Gitee：
 curl -o "./plugins/example/kick.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/kick.js"
 ```
 
+</details>
 
-## 怪物入侵
+#### 怪物入侵
+
+<details><summary>展开/收起</summary>
 
 - 暂时只支持以下几种场景
 - 喵崽的QQ群 私聊
@@ -128,6 +179,7 @@ Gitee：
 curl -o "./plugins/example/invade.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/invade.js"
 ```
 
+</details>
 
 ## 爱发电
 
