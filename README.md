@@ -119,9 +119,11 @@ curl -o "./plugins/example/download_js.js" "https://gitee.com/Zyy955/Yunzai-Bot-
 </details>
 
 
-#### 踢
+#### 踹
 
 <details><summary>展开/收起</summary>
+
+2023年9月13日之后，更新触发词`#踢`为`#踹`
 
 - 暂时只支持以下几种场景
 - 喵崽的QQ群 私聊

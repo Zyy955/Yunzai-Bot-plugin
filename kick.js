@@ -12,45 +12,51 @@ import puppeteer from '../../lib/puppeteer/puppeteer.js'
 const file = `${process.cwd()}/resources`
 
 export class kick extends plugin {
-    constructor() {
-        super({
-            name: '踢',
-            dsc: '表情包生成',
-            event: 'message',
-            priority: 1,
-            rule: [
-                {
-                    reg: /^[#/](踢|滚|kick)$/,
-                    fnc: 'kick'
-                }
-            ]
-        })
-    }
-
-
-    async kick(e) {
-        /** 检测html是否存在 */
-        if (!fs.existsSync(`${file}/kick/kick.html`)) html()
-        /** 定义头像链接 */
-        let url = e.author?.avatar || `https://q1.qlogo.cn/g?b=qq&s=0&nk=${e.user_id}`
-        /** 存在at的时候处理链接 */
-        if (e.at) url = e.mentions?.[0]?.avatar || `https://q1.qlogo.cn/g?b=qq&s=0&nk=${e.at}`
-
-        /** 定义基础参数 */
-        const data = {
-            imgurl: url,
-            saveId: 'kick',
-            _plugin: 'kick',
-            tplFile: './resources/kick/kick.html',
+  constructor() {
+    super({
+      name: '踹',
+      dsc: '表情包生成',
+      event: 'message',
+      priority: -100,
+      rule: [
+        {
+          reg: /^[#/](踹|滚|kick)$/,
+          fnc: 'kick'
         }
-        return e.reply(await puppeteer.screenshot(`kick/kick`, data))
+      ]
+    })
+  }
+
+
+  async kick(e) {
+    /** 检测html是否存在 */
+    if (!fs.existsSync(`${file}/kick/kick.html`)) html()
+    /** 定义头像链接 */
+    let url = e.author?.avatar || `https://q1.qlogo.cn/g?b=qq&s=0&nk=${e.user_id}`
+    /** 存在at的时候处理链接 */
+    if (e.at) {
+      const mentions = e?.mentions
+      if (mentions) {
+        for (let i of mentions) if (i.id === e.at) url = i.avatar
+      }
+      else url = `https://q1.qlogo.cn/g?b=qq&s=0&nk=${e.at}`
     }
+
+    /** 定义基础参数 */
+    const data = {
+      imgurl: url,
+      saveId: 'kick',
+      _plugin: 'kick',
+      tplFile: './resources/kick/kick.html',
+    }
+    return e.reply(await puppeteer.screenshot(`kick/kick`, data))
+  }
 }
 
 function html() {
-    if (!fs.existsSync(file + "/kick")) fs.mkdirSync(file + "/kick")
+  if (!fs.existsSync(file + "/kick")) fs.mkdirSync(file + "/kick")
 
-    const htmlContent = `<!DOCTYPE html>
+  const htmlContent = `<!DOCTYPE html>
     <html>
     
     <head>
@@ -112,5 +118,5 @@ function html() {
     
     </html>`
 
-    if (!fs.existsSync(file + "/kick/kick.html")) fs.writeFileSync(file + "/kick/kick.html", htmlContent)
+  if (!fs.existsSync(file + "/kick/kick.html")) fs.writeFileSync(file + "/kick/kick.html", htmlContent)
 }
