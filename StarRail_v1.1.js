@@ -8,6 +8,13 @@ let SR = {
     sr: false
 }
 
+/** 
+ * 是否拦截星铁插件的绑定UID
+ * false为不拦截、true为拦截
+ * 没装星铁插件别开... 
+ */
+let intercept = false
+
 export class StarRail extends plugin {
     constructor() {
         super({
@@ -92,6 +99,16 @@ export class StarRail extends plugin {
         e.reply(`当前状态：\n${miao}\n${sr_}`)
     }
 }
+
+/** 拦截星铁插件绑定UID */
+if (fs.existsSync("./plugins/StarRail-plugin") && intercept) {
+    const Hkrpg = (await import("../StarRail-plugin/apps/hkrpg.js")).Hkrpg
+    Hkrpg.prototype.bindSRUid = async function () {
+        logger.info("星铁插件绑定UID已经被拦截...")
+        return false
+    }
+}
+
 
 
 /** 重写原始插件 放弃使用原绑定uid方法 */
