@@ -16,6 +16,11 @@ export class master extends plugin {
                 {
                     reg: /^#设置主人$/,
                     fnc: 'master'
+                },
+                {
+                    reg: /^#(删除|取消)主人$/,
+                    fnc: "del_master",
+                    permission: "master"
                 }
             ]
         })
@@ -45,6 +50,16 @@ export class master extends plugin {
         }
     }
 
+    async del_master(e) {
+        if (!e.at) return e.reply("你都没有告诉我是谁！快@他吧！^_^")
+        let cfg = fs.readFileSync(file, "utf8")
+        if (!cfg.match(RegExp(`- "?${e.at}"?`)))
+            return e.reply("这个人不是主人啦(〃'▽'〃)", false, { at: true })
+        cfg = cfg.replace(RegExp(`\\n  - "?${e.at}"?`), "")
+        fs.writeFileSync(file, cfg, "utf8")
+        e.reply([segment.at(e.at), "拜拜~"])
+    }
+
     SetAdmin() {
         /** 结束上下文 */
         this.finish('SetAdmin')
@@ -58,6 +73,8 @@ export class master extends plugin {
 }
 
 function add(e) {
+    let match
+    let text
     let cfg = fs.readFileSync(file, "utf8")
     /** 使用正则表达式确认是TRSS还是Miao */
     if (cfg.match(RegExp("master:"))) {
@@ -65,7 +82,11 @@ function add(e) {
         const value = `master:\n  - "${e.self_id}:${user}"`
         cfg = cfg.replace(RegExp("master:"), value)
     } else {
-        cfg = cfg.replace(RegExp("masterQQ:"), `masterQQ:\n  - ${user}`)
+        const regexp = /masterQQ([\s\S]*?)disableGuildMsg/g
+        while ((match = regexp.exec(cfg)) !== null) { text = match[0] }
+        const msg = `\n  - ${user}\n# 禁用频道功能 true: 不接受频道消息，flase：接受频道消息\ndisableGuildMsg`
+        text = `${text.replace(/((\n#[\s\S]*|\n{1,3})|\n{1,3})?disableGuildMsg/g, "")}${msg}`
+        cfg = cfg.replace(RegExp("masterQQ[\\s\\S]*disableGuildMsg"), text)
     }
     fs.writeFileSync(file, cfg, "utf8")
     return [segment.at(user), "新主人好~(*/ω＼*)"]
