@@ -73,20 +73,27 @@ export class master extends plugin {
 }
 
 function add(e) {
-    let match
-    let text
     let cfg = fs.readFileSync(file, "utf8")
     /** 使用正则表达式确认是TRSS还是Miao */
     if (cfg.match(RegExp("master:"))) {
-        cfg = cfg.replace(RegExp("masterQQ:"), `masterQQ:\n  - "${user}"`)
-        const value = `master:\n  - "${e.self_id}:${user}"`
-        cfg = cfg.replace(RegExp("master:"), value)
+        /** 保留注释 */
+        const document = Yaml.parseDocument(cfg)
+        const masterQQ = document.get("masterQQ")
+        masterQQ.add(user)
+        document.set("masterQQ", masterQQ)
+
+        const master = document.get("master")
+        master.add(`${e.self_id}:${user}`)
+        document.set("master", master)
+
+        cfg = document.toString()
     } else {
-        const regexp = /masterQQ([\s\S]*?)disableGuildMsg/g
-        while ((match = regexp.exec(cfg)) !== null) { text = match[0] }
-        const msg = `\n  - ${user}\n# 禁用频道功能 true: 不接受频道消息，flase：接受频道消息\ndisableGuildMsg`
-        text = `${text.replace(/((\n#[\s\S]*|\n{1,3})|\n{1,3})?disableGuildMsg/g, "")}${msg}`
-        cfg = cfg.replace(RegExp("masterQQ[\\s\\S]*disableGuildMsg"), text)
+        /** 保留注释 */
+        const document = Yaml.parseDocument(cfg)
+        const masterQQ = document.get("masterQQ")
+        masterQQ.add(user)
+        document.set("masterQQ", masterQQ)
+        cfg = document.toString()
     }
     fs.writeFileSync(file, cfg, "utf8")
     return [segment.at(user), "新主人好~(*/ω＼*)"]
