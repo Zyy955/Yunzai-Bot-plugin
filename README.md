@@ -89,6 +89,37 @@ curl -o "./apps.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/apps.js
 
 </details>
 
+#### 全部更新改转发
+
+<details><summary>展开/收起</summary>
+
+```
+#修改输出1、2、3
+#输出方式
+
+请自行设置三种输出方式
+1：原方式
+2：单独输出更新插件名称：开始更新 Miao-Yunzai 等
+3：只输出一次 开始更新 Miao-Yunzai 随后更新完成合并转发输出
+可使用指令修改输出方式，#修改输出1、#修改输出2、#修改输出3
+
+#输出方式：查看当前的模式
+```
+
+##### 下载
+Github：
+```
+curl -o "./plugins/example/forward_updateAll.js" "https://raw.githubusercontent.com/Zyy955/Yunzai-Bot-plugin/main/forward_updateAll.js"
+```
+
+Gitee：
+```
+curl -o "./plugins/example/forward_updateAll.js" "https://gitee.com/Zyy955/Yunzai-Bot-plugin/raw/main/forward_updateAll.js"
+```
+
+</details>
+
+
 #### 提供js下载链接直接下载到example目录
 
 <details><summary>展开/收起</summary>
