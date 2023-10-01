@@ -165,8 +165,7 @@ export class update extends plugin {
             const msgA = `${this.typeName} 已是最新\n最后更新时间：${time}`
 
             /** 根据设置选择输出方式 */
-            if (types === "1") await this.reply(msgA)
-            else log.push(msgA)
+            types === "1" ? await this.reply(msgA) : log.push(msgA)
         } else {
             this.isUp = true
             const msgA = `${this.typeName} 更新成功\n更新时间：${time}`
@@ -220,30 +219,38 @@ export class update extends plugin {
 
         if (errMsg.includes('Timed out')) {
             const remote = errMsg.match(/'(.+?)'/g)[0].replace(/'/g, '')
-            return `${msg}\n连接超时：${remote}`
+            const _msg = [`${msg}\n连接超时：${remote}`]
+            if (types === "1") return await this.reply(_msg)
+            return _msg
         }
 
         if (/Failed to connect|unable to access/g.test(errMsg)) {
             const remote = errMsg.match(/'(.+?)'/g)[0].replace(/'/g, '')
-            return `${msg}\n连接失败：${remote}`
+            const _msg = [`${msg}\n连接失败：${remote}`]
+            if (types === "1") return await this.reply(_msg)
+            return _msg
         }
 
         if (errMsg.includes('be overwritten by merge')) {
-            return `${msg}\n存在冲突：\n${errMsg}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`
+            const _msg = [`${msg}\n存在冲突：\n${errMsg}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`]
+            if (types === "1") return await this.reply(_msg)
+            return _msg
         }
 
         if (stdout.includes('CONFLICT')) {
-            return `${msg}\n存在冲突：\n${errMsg}${stdout}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`
+            const _msg = [`${msg}\n存在冲突：\n${errMsg}${stdout}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`]
+            if (types === "1") return await this.reply(_msg)
+            return _msg
         }
 
         return [errMsg, stdout]
     }
 
     async updateAll() {
-        const Update_log = []
+        const log_All = []
         const dirs = fs.readdirSync('./plugins/')
 
-        await this.runUpdate()
+        types !== "1" ? log_All.push(...await this.runUpdate()) : await this.runUpdate()
 
         for (let plu of dirs) {
             plu = this.getPlugin(plu)
@@ -252,27 +259,15 @@ export class update extends plugin {
 
             try {
                 /** 根据设置选择输出方式 */
-                if (types !== "1") {
-                    Update_log.push(...(await this.runUpdate(plu)))
-                } else {
-                    await this.runUpdate(plu)
-                }
+                types !== "1" ? log_All.push(...(await this.runUpdate(plu))) : await this.runUpdate(plu)
             } catch (err) {
                 /** 根据设置选择输出方式 */
-                if (types !== "1") {
-                    Update_log.push(err)
-                } else {
-                    await this.reply(JSON.stringify(err))
-                }
+                types !== "1" ? log_All.push(err) : await this.reply(JSON.stringify(err))
             }
         }
 
         /** 根据设置选择输出方式 */
-        if (types !== "1") {
-            await this.reply(await common.makeForwardMsg(this.e, Update_log, `更新完成，共${Update_log.length}条更新日志`))
-        } else {
-            await this.reply(`全部更新完成~`)
-        }
+        types === "1" ? await this.reply(`全部更新完成~`) : await this.reply(await common.makeForwardMsg(this.e, log_All, `更新完成，共${log_All.length}条更新日志`))
 
         if (this.isUp) {
             // await this.reply('即将执行重启，以应用更新')
