@@ -51,7 +51,7 @@ export class update extends plugin {
             return true
         } else {
             const msg = this.e.msg.replace(/#|修改|输出|方式/g, "").trim()
-            const fileurl = decodeURI(import.meta.url);
+            const fileurl = decodeURI(import.meta.url)
             const js_name = fileurl.substring(fileurl.lastIndexOf('/') + 1).split('?')[0]
             const _path = process.cwd() + "/plugins"
             let cfg = fs.readFileSync(_path + `/example/${js_name}`, 'utf8')
@@ -220,20 +220,20 @@ export class update extends plugin {
 
         if (errMsg.includes('Timed out')) {
             const remote = errMsg.match(/'(.+?)'/g)[0].replace(/'/g, '')
-            return this.reply(`${msg}\n连接超时：${remote}`)
+            return `${msg}\n连接超时：${remote}`
         }
 
         if (/Failed to connect|unable to access/g.test(errMsg)) {
             const remote = errMsg.match(/'(.+?)'/g)[0].replace(/'/g, '')
-            return this.reply(`${msg}\n连接失败：${remote}`)
+            return `${msg}\n连接失败：${remote}`
         }
 
         if (errMsg.includes('be overwritten by merge')) {
-            return this.reply(`${msg}\n存在冲突：\n${errMsg}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`)
+            return `${msg}\n存在冲突：\n${errMsg}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`
         }
 
         if (stdout.includes('CONFLICT')) {
-            return this.reply(`${msg}\n存在冲突：\n${errMsg}${stdout}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`)
+            return `${msg}\n存在冲突：\n${errMsg}${stdout}\n请解决冲突后再更新，或者执行#强制更新，放弃本地修改`
         }
 
         return [errMsg, stdout]
@@ -250,11 +250,20 @@ export class update extends plugin {
             if (plu === false) continue
             await common.sleep(1500)
 
-            /** 根据设置选择输出方式 */
-            if (types !== "1") {
-                Update_log.push(...(await this.runUpdate(plu)))
-            } else {
-                await this.runUpdate(plu)
+            try {
+                /** 根据设置选择输出方式 */
+                if (types !== "1") {
+                    Update_log.push(...(await this.runUpdate(plu)))
+                } else {
+                    await this.runUpdate(plu)
+                }
+            } catch (err) {
+                /** 根据设置选择输出方式 */
+                if (types !== "1") {
+                    Update_log.push(err)
+                } else {
+                    await this.reply(JSON.stringify(err))
+                }
             }
         }
 
@@ -315,11 +324,5 @@ export class update extends plugin {
         }
 
         return common.makeForwardMsg(this.e, [log, end], `${plugin || 'Miao-Yunzai'} 更新日志，共${line}条`)
-    }
-
-    async updateLog() {
-        const plugin = this.getPlugin()
-        if (plugin === false) return false
-        return this.reply(await this.getLog(plugin))
     }
 }
