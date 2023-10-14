@@ -1,10 +1,15 @@
-import fs from 'node:fs'
-import { Client } from 'icqq'
-import cfg from './lib/config/config.js'
-import setLog from './lib/config/log.js'
-import redisInit from './lib/config/redis.js'
-import { checkRun } from './lib/config/check.js'
-import ListenerLoader from './lib/listener/loader.js'
+import fs from "node:fs"
+import { Client } from "icqq"
+import cfg from "./lib/config/config.js"
+import setLog from "./lib/config/log.js"
+import { Restart } from "./plugins/other/restart.js"
+import redisInit from "./lib/config/redis.js"
+import { checkRun } from "./lib/config/check.js"
+import ListenerLoader from "./lib/listener/loader.js"
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
+const { exec } = require('child_process')
 
 /** 设置标题 */
 process.title = 'Miao-Yunzai'
@@ -57,6 +62,48 @@ async function checkInit() {
 
     //** 更新标题 */
     await UpdateTitle()
+
+    Restart.prototype.restart = async function () {
+        await this.e.reply('开始执行重启，请稍等...')
+        logger.mark(`${this.e.logFnc} 开始执行重启，请稍等...`)
+
+        let data = JSON.stringify({
+            isGroup: !!this.e.isGroup,
+            id: this.e.isGroup ? this.e.group_id : this.e.user_id,
+            time: new Date().getTime()
+        })
+
+        let npm = await this.checkPnpm()
+
+        try {
+            await redis.set(this.key, data, { EX: 120 })
+            const pm2 = `--name "Miao-Yunzai-apps" ./apps.js --max-memory-restart "512M" --restart-delay "60000"`
+            let cm = `${npm} pm2 start ${pm2}`
+            if (process.argv[1].includes('pm2')) {
+                cm = `${npm} run restart ${pm2}`
+            }
+
+            exec(cm, { windowsHide: true }, (error, stdout, stderr) => {
+                if (error) {
+                    redis.del(this.key)
+                    this.e.reply(`操作失败！\n${error.stack}`)
+                    logger.error(`重启失败\n${error.stack}`)
+                } else if (stdout) {
+                    logger.mark('重启成功，运行已由前台转为后台')
+                    logger.mark(`查看日志请用命令：${npm} run log`)
+                    logger.mark(`停止后台运行命令：${npm} stop`)
+                    process.exit()
+                }
+            })
+        } catch (error) {
+            redis.del(this.key)
+            let e = error.stack ?? error
+            this.e.reply(`操作失败！\n${e}`)
+        }
+
+        return true
+
+    }
 }
 
 export default class Yunzai extends Client {
