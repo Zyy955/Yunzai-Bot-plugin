@@ -220,7 +220,7 @@ function msg(msg) {
     /** 发送消息 */
     async function sendMsg(msg) {
         if (typeof msg === "string") {
-            return logger.info(`${chalk.hex("#868ECC")(`[${name}]`)}发送消息：${reply}`)
+            return logger.info(`${chalk.hex("#868ECC")(`[${name}]`)}发送消息：${msg}`)
         } else {
             return logger.info(`${chalk.hex("#868ECC")(`[${name}]`)}发送消息：${JSON.stringify(msg).slice(0, 2000)}`)
         }
