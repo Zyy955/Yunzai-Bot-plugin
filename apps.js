@@ -79,10 +79,9 @@ async function checkInit() {
 
         try {
             await redis.set(this.key, data, { EX: 120 })
-            const pm2 = `--name "Miao-Yunzai" ./apps.js --max-memory-restart "512M" --restart-delay "60000"`
-            let cm = `${npm} pm2 start ${pm2}`
+            let cm = `${npm} pm2 start --name "Miao-Yunzai" ./apps.js --max-memory-restart "512M" --restart-delay "60000"`
             if (process.argv[1].includes('pm2')) {
-                cm = `${npm} run restart ${pm2}`
+                cm = `${npm} pm2 restart "Miao-Yunzai"`
             }
 
             exec(cm, { windowsHide: true }, (error, stdout, stderr) => {
@@ -147,18 +146,15 @@ getInput()
 
 function msg(msg) {
     const user_id = 55555
-    const group_id = 99999
     const name = "标准输入"
     const time = Date.now() / 1000
 
     let e = {
-        adapter: "apps",
-        group_id,
-        group_name: "测试群聊",
+        adapter: "cmd",
         message_id: "test123456",
-        message_type: "group",
+        message_type: "private",
         post_type: "message",
-        sub_type: "normal",
+        sub_type: "friend",
         self_id: Bot.uin,
         seq: 888,
         time,
@@ -180,14 +176,10 @@ function msg(msg) {
     /** 构建member */
     const member = {
         info: {
-            group_id,
             user_id,
             nickname: name,
             last_sent_time: time,
         },
-        group_id,
-        is_admin: "",
-        is_owner: "",
         /** 获取头像 */
         getAvatarUrl: () => {
             return `https://q1.qlogo.cn/g?b=qq&s=0&nk=528952540`
@@ -198,7 +190,7 @@ function msg(msg) {
     e.member = member
 
     /** 构建场景对应的方法 */
-    e.group = {
+    e.friend = {
         recallMsg: (msg_id) => {
             return logger.mark(`${chalk.hex("#868ECC")(`[${name}]`)}撤回消息：${msg_id}`)
 
