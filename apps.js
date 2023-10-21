@@ -191,13 +191,28 @@ function msg(msg) {
 
     /** 构建场景对应的方法 */
     e.friend = {
+        sendMsg: async (reply) => {
+            return await sendMsg(reply)
+        },
         recallMsg: (msg_id) => {
             return logger.mark(`${chalk.hex("#868ECC")(`[${name}]`)}撤回消息：${msg_id}`)
 
         },
-        sendMsg: async (reply, reference) => {
-            return await sendMsg(reply)
-        },
+        makeForwardMsg: async (forwardMsg) => {
+            const msg = []
+            try {
+                for (const i of forwardMsg) {
+                    if (i?.message) {
+                        msg.push(i.message)
+                    } else {
+                        msg.push(JSON.stringify(i).slice(0, 2000))
+                    }
+                }
+                return msg
+            } catch (error) {
+                return forwardMsg
+            }
+        }
     }
 
     /** 快速撤回 */
@@ -205,7 +220,7 @@ function msg(msg) {
         return logger.mark(`${chalk.hex("#868ECC")(`[${name}]`)}撤回消息：${msg.id}`)
     }
     /** 快速回复 */
-    e.reply = async (reply, reference) => {
+    e.reply = async (reply) => {
         return await sendMsg(reply)
     }
 
