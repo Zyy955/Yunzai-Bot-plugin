@@ -4,8 +4,8 @@
  */
 import { Cfg } from '#miao'
 
-/** 设置显示排名数量，不推荐过大，默认100 */
-const num = 100
+/** 设置显示排名数量，不推荐过大，默认50 */
+const num = 50
 
 const ProfileRank = (await import("../miao-plugin/models/ProfileRank.js")).default
 ProfileRank.getGroupUidList = async function (groupId, charId, type = 'mark') {
@@ -25,16 +25,15 @@ ProfileRank.getGroupUidList = async function (groupId, charId, type = 'mark') {
         uids.push(...result)
     }
     /** 去重 */
-    uids = Array.from(new Set(uids.map(JSON.stringify))).map(JSON.parse)
-    /** 二次去重 */
-    uids = uids.filter((item, index, self) =>
-        index === self.findIndex((t) => (
-            t.value === item.value && t.score === item.score
-        ))
-    )
+    uids = Object.values(uids.reduce((acc, cur) => {
+        if (!acc[cur.value] || acc[cur.value].score < cur.score) {
+            acc[cur.value] = cur
+        }
+        return acc
+    }, {}))
     /** 重新排序 */
     uids.sort((a, b) => b.score - a.score)
-    /** 只取100个 */
+    /** 只取50个 */
     if (uids.length > Number(num)) uids.splice(Number(num))
     return uids ? uids.reverse() : false
 }
